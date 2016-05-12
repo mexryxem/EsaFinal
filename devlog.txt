@@ -1,1 +1,6 @@
 Development Log
+
+Day 1: 5/12/16
+- added a dev log
+- setup Abstract parent class for the different types of trees
+- thought about fields for Main and added them to Main
