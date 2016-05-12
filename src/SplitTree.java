@@ -1,7 +1,8 @@
 
-public class SplitTree {
+public class SplitTree extends AbstractTree{
 
-	public void drawTree(){
+	@Override
+	public void drawTree(Turtle t, int level, float length, float angle, int thickness, int color) {
 		
 	}
 }

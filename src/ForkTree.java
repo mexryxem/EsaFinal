@@ -1,7 +1,9 @@
 
-public class ForkTree {
+public class ForkTree extends AbstractTree {
 	
-	public void drawTree(){
+
+	@Override
+	public void drawTree(Turtle t, int level, float length, float angle, int thickness, int color) {
 		
 	}
 	
