@@ -39,6 +39,9 @@ public class Main extends PApplet{
 		tree1 = new SlingshotTree(t, 1, 100, 30, 7, 10);
 		tree2 = new ForkTree(t, 1, 100, 30, 7, 10);
 		tree3 = new SplitTree(t, 1, 100, 30, 7, 10);
+		
+		//currentTree will change immediately after Phase1 - this is just to initialize it
+		currentTree = new SlingshotTree(t, 1, 100, 30, 7, 10);
 	}
 	
 	public void draw(){
@@ -49,39 +52,83 @@ public class Main extends PApplet{
 	}
 	
 	public void displayTrees(){
+		// move to middle of first third
+		// display tree1
 		
+		// move to middle of second third
+		// display tree2
+		
+		// move to middle of last third
+		// display tree3
 	}
 	
 	public void displayFinalTree(){
-		
+		currentTree.display();
 	}
 	
 	// this handles changing of modes and updating the currentTree
 	public void mouseReleased(){
-		if(currentMode == Mode.INTRO)
+		if(currentMode == Mode.INTRO){
 			currentMode = Mode.TREE_TYPE;
 		
-		if(currentMode == Mode.TREE_TYPE){
+		} else if(currentMode == Mode.TREE_TYPE){
 			updateCurrentTree();
+			updateOptions();
 			currentMode = Mode.PHASE1;
 					
 		} else if(currentMode == Mode.PHASE1){
 			updateCurrentTree();
+			updateOptions();
 			currentMode = Mode.PHASE2;
 			
 		} else if(currentMode == Mode.PHASE2){
 			updateCurrentTree();
+			updateOptions();
 			currentMode = Mode.PHASE3;
 			
 		} else if(currentMode == Mode.PHASE3){
 			updateCurrentTree();
+			updateOptions();
 			currentMode = Mode.PHASE4;
 			
 		} else if(currentMode == Mode.PHASE4){
 			updateCurrentTree();
+			updateOptions();
 			currentMode = Mode.END;
 		}
 			
+	}
+	
+	public void updateOptions(){
+		tree1 = getTransformedInstanceTree(tree1);
+		tree2 = getTransformedInstanceTree(tree2);
+		tree3 = getTransformedInstanceTree(tree3);
+	}
+	
+	public AbstractTree getTransformedInstanceTree(AbstractTree tree){
+		if(tree instanceof SlingshotTree){
+			return (new SlingshotTree(t,
+					tree1.getLevel() * (int)(1 + Math.random() * 13),
+					tree1.getLength() * (int)(90 + Math.random() * 150),
+					tree1.getAngle() * (float)(25 + Math.random() * 35),
+					tree1.getThickness(),
+					tree1.getColor()));
+			
+		} else if(tree instanceof ForkTree){
+			return (new ForkTree(t,
+					tree1.getLevel() * (int)(1 + Math.random() * 13),
+					tree1.getLength() * (int)(90 + Math.random() * 150),
+					tree1.getAngle() * (float)(25 + Math.random() * 35),
+					tree1.getThickness(),
+					tree1.getColor()));
+		}
+		
+		return (new SplitTree(t,
+				tree1.getLevel() * (int)(1 + Math.random() * 13),
+				tree1.getLength() * (int)(90 + Math.random() * 150),
+				tree1.getAngle() * (float)(25 + Math.random() * 35),
+				tree1.getThickness(),
+				tree1.getColor()));
 	}
 	
 	public void updateCurrentTree(){

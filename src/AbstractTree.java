@@ -18,6 +18,9 @@ public abstract class AbstractTree {
 	}
 	abstract void drawTree(Turtle t, int level, int length, float angle, int thickness, int color);
 	
+	public void display(){
+		drawTree(t, initLevel, initLength, angle, initThickness, initColor);
+	}
 	public int getLevel(){
 		return initLevel;
 	}
