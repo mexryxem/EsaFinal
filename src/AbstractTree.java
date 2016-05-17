@@ -1,11 +1,11 @@
 
 public abstract class AbstractTree {
 	Turtle t;
-	int initLevel;
-	int initLength;
-	float angle;
-	int initThickness;
-	int initColor;
+	private int initLevel;
+	private int initLength;
+	private float angle;
+	private int initThickness;
+	private int initColor;
 
 	public AbstractTree(Turtle t, int level, int length, float angle, int thickness, int color){
 		this.t = t;

@@ -4,3 +4,7 @@ Day 1: 5/12/16
 - added a dev log
 - setup Abstract parent class for the different types of trees
 - thought about fields for Main and added them to Main
+
+
+Day 2: 5/16/16
+- handle how modes are changed and the savedTree is updated (mouseReleased, updateTree, getInstanceTree)
