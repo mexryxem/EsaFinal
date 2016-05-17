@@ -11,3 +11,6 @@ Day 2: 5/16/16
 
 Day 3: 5/17/16
 - handle how the tree options are updated between phases (updateOptions(), getTransformedInstanceTree())
+- setup fonts and text for displaying the intro
+next workday: - want to finish displayTrees() in Main
+			  - start filling in drawTree(...) for the different types of trees (Slingshot, Fork, and Split)

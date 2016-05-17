@@ -1,33 +1,39 @@
 import processing.core.PApplet;
+import processing.core.PFont;
 
 public class Main extends PApplet{
+	//applet dimensions
+	private final int LENGTH = 600;
+	private final int WIDTH = 1300;
+		
 	// the horizontal starting point for each third of the screen; 
 	private final int FIRST_THIRD = 0;
 	private final int SECOND_THIRD = 433;
 	private final int LAST_THIRD = 867;
 	
-	//applet dimensions
-	private final int LENGTH = 600;
-	private final int WIDTH = 1300;
-	
-	
-	private Mode currentMode;
 	// the different phases of the simulation
 	// each mode represents a new screen displaying something different
+	private Mode currentMode;
 	private enum Mode{
 		INTRO, TREE_TYPE, PHASE1, PHASE2, PHASE3, PHASE4, END
 	}
 	
-	//tree that corresponds to a third of the screen
+	
+	// the tree that the game is working towards
+	// it is updated every time one of the tree options
+	// is selected
+	private AbstractTree currentTree;
+
+	//tree options that corresponds to a third of the screen
 	private AbstractTree tree1;
 	private AbstractTree tree2;
 	private AbstractTree tree3;
 	
-	private AbstractTree currentTree;
-	
 	private Turtle t;
 	
-	//tree saved with all the attributes
+	// word stuff
+	PFont f;
+	
 	public void setup(){
 		size(WIDTH, LENGTH);
 		background(255);
@@ -42,9 +48,16 @@ public class Main extends PApplet{
 		
 		//currentTree will change immediately after Phase1 - this is just to initialize it
 		currentTree = new SlingshotTree(t, 1, 100, 30, 7, 10);
+		
+		// word stuff
+		f = createFont("Georgia", 200);
+		textFont(f);
+		textAlign(CENTER, CENTER);
+		
 	}
 	
 	public void draw(){
+		background(255);
 		if(currentMode == Mode.INTRO) displayIntro();
 		else if(currentMode == Mode.END) displayFinalTree();
 		else displayTrees();
@@ -66,12 +79,13 @@ public class Main extends PApplet{
 		currentTree.display();
 	}
 	
+	public void keyPressed(){
+		if(currentMode == Mode.INTRO)
+			currentMode = Mode.TREE_TYPE;
+	}
 	// this handles changing of modes and updating the currentTree
 	public void mouseReleased(){
-		if(currentMode == Mode.INTRO){
-			currentMode = Mode.TREE_TYPE;
-		
-		} else if(currentMode == Mode.TREE_TYPE){
+		if(currentMode == Mode.TREE_TYPE){
 			updateCurrentTree();
 			updateOptions();
 			currentMode = Mode.PHASE1;
@@ -159,6 +173,8 @@ public class Main extends PApplet{
 	}
 	
 	public void displayIntro(){
-		
+		fill(47,79,79);
+		text("welcome", WIDTH/2, LENGTH/2);
+		text("press any key to continue", WIDTH/2, LENGTH/2 + 100, -200); //TODO: z parameter is not working
 	}
 }
