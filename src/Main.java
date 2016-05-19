@@ -47,9 +47,9 @@ public class Main extends PApplet{
 		t = new Turtle(this);
 		t.setDirection(90);
 		
-		tree1 = new SlingshotTree(t, 2, 100, 30, 7, 10);
-		tree2 = new ForkTree(t, 2, 100, 30, 7, 10);
-		tree3 = new SplitTree(t, 2, 100, 30, 7, 10);
+		tree1 = new SlingshotTree(t, 3, 100, 30, 7, 10);
+		tree2 = new ForkTree(t, 3, 100, 30, 7, 10);
+		tree3 = new SplitTree(t, 3, 100, 30, 7, 10);
 		
 		//currentTree will be updated immediately after Phase1 - this is just to initialize it
 		currentTree = new SlingshotTree(t, 1, 100, 30, 7, 10);
@@ -141,7 +141,7 @@ public class Main extends PApplet{
 			
 		} else if(tree instanceof ForkTree){
 			return (new ForkTree(t,
-					tree1.getLevel() * (int)(1 + Math.random() * 13),
+					tree1.getLevel() * (int)(3 + Math.random() * 9),
 					tree1.getLength() * (int)(90 + Math.random() * 150),
 					tree1.getAngle() * (float)(25 + Math.random() * 35),
 					tree1.getThickness(),

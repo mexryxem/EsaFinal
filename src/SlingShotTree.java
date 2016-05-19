@@ -17,14 +17,14 @@ public class SlingshotTree extends AbstractTree{
 		t.setThickness(thickness);
 		t.setColor(color);
 		
-		//tree trunk
+		// trunk
 		t.forward(length);
 
-		//left branch
+		// left branch
 		t.turnLeft(angle);
 		drawTree(t, level - 1, length/1.3f, angle, (int)(thickness/1.5), (int)(color/.7));
 		
-		//right branch
+		// right branch
 		t.turnRight(2 * angle);
 		drawTree(t, level - 1, length/1.3f, angle, (int)(thickness/1.5), (int)(color/.7));
 		
