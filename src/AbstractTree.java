@@ -2,12 +2,12 @@
 public abstract class AbstractTree {
 	Turtle t;
 	private int initLevel;
-	private int initLength;
+	private float initLength;
 	private float angle;
 	private int initThickness;
 	private int initColor;
 
-	public AbstractTree(Turtle t, int level, int length, float angle, int thickness, int color){
+	public AbstractTree(Turtle t, int level, float length, float angle, int thickness, int color){
 		this.t = t;
 		initLevel = level;
 		initLength = length;
@@ -16,7 +16,8 @@ public abstract class AbstractTree {
 		initColor = color;
 		
 	}
-	abstract void drawTree(Turtle t, int level, int length, float angle, int thickness, int color);
+	
+	abstract void drawTree(Turtle t, int level, float length, float angle, int thickness, int color);
 	
 	public void display(){
 		drawTree(t, initLevel, initLength, angle, initThickness, initColor);
@@ -25,7 +26,7 @@ public abstract class AbstractTree {
 		return initLevel;
 	}
 	
-	public int getLength(){
+	public float getLength(){
 		return initLength;
 	}
 	

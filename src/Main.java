@@ -45,11 +45,11 @@ public class Main extends PApplet{
 		currentMode = Mode.INTRO;
 		
 		t = new Turtle(this);
-		t.setDirection(0);
+		t.setDirection(90);
 		
-		tree1 = new SlingshotTree(t, 1, 100, 30, 7, 10);
-		tree2 = new ForkTree(t, 1, 100, 30, 7, 10);
-		tree3 = new SplitTree(t, 1, 100, 30, 7, 10);
+		tree1 = new SlingshotTree(t, 2, 100, 30, 7, 10);
+		tree2 = new ForkTree(t, 2, 100, 30, 7, 10);
+		tree3 = new SplitTree(t, 2, 100, 30, 7, 10);
 		
 		//currentTree will be updated immediately after Phase1 - this is just to initialize it
 		currentTree = new SlingshotTree(t, 1, 100, 30, 7, 10);
@@ -186,6 +186,6 @@ public class Main extends PApplet{
 	public void displayIntro(){
 		fill(47,79,79);
 		text("welcome", WIDTH/2, LENGTH/2);
-		text("press any key to continue", WIDTH/2, LENGTH/2 + 100, -200); //TODO: z parameter is not working
+		//text("press any key to continue", WIDTH/2, LENGTH/2 + 100, -200); //TODO: z parameter is not working
 	}
 }
