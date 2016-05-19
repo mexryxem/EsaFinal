@@ -5,11 +5,15 @@ public class Main extends PApplet{
 	//applet dimensions
 	private final int LENGTH = 600;
 	private final int WIDTH = 1300;
-		
+	
 	// the horizontal starting point for each third of the screen; 
 	private final int FIRST_THIRD = 0;
 	private final int SECOND_THIRD = 433;
 	private final int LAST_THIRD = 867;
+	
+	
+	private final int HALF_A_THIRD = (int)(WIDTH/6);
+	private final int TREE_START_Y = LENGTH - LENGTH/6;
 	
 	// the different phases of the simulation
 	// each mode represents a new screen displaying something different
@@ -23,7 +27,7 @@ public class Main extends PApplet{
 	// it is updated every time one of the tree options
 	// is selected
 	private AbstractTree currentTree;
-
+	
 	//tree options that corresponds to a third of the screen
 	private AbstractTree tree1;
 	private AbstractTree tree2;
@@ -41,12 +45,13 @@ public class Main extends PApplet{
 		currentMode = Mode.INTRO;
 		
 		t = new Turtle(this);
+		t.setDirection(0);
 		
 		tree1 = new SlingshotTree(t, 1, 100, 30, 7, 10);
 		tree2 = new ForkTree(t, 1, 100, 30, 7, 10);
 		tree3 = new SplitTree(t, 1, 100, 30, 7, 10);
 		
-		//currentTree will change immediately after Phase1 - this is just to initialize it
+		//currentTree will be updated immediately after Phase1 - this is just to initialize it
 		currentTree = new SlingshotTree(t, 1, 100, 30, 7, 10);
 		
 		// word stuff
@@ -65,14 +70,14 @@ public class Main extends PApplet{
 	}
 	
 	public void displayTrees(){
-		// move to middle of first third
-		// display tree1
+		t.goToPoint(HALF_A_THIRD, TREE_START_Y);
+		tree1.display();
 		
-		// move to middle of second third
-		// display tree2
+		t.goToPoint(SECOND_THIRD + HALF_A_THIRD, TREE_START_Y);
+		tree2.display();
 		
-		// move to middle of last third
-		// display tree3
+		t.goToPoint(LAST_THIRD + HALF_A_THIRD, TREE_START_Y);
+		tree3.display();
 	}
 	
 	public void displayFinalTree(){
@@ -83,29 +88,35 @@ public class Main extends PApplet{
 		if(currentMode == Mode.INTRO)
 			currentMode = Mode.TREE_TYPE;
 	}
+	
 	// this handles changing of modes and updating the currentTree
 	public void mouseReleased(){
 		if(currentMode == Mode.TREE_TYPE){
+			System.out.println("p1");
 			updateCurrentTree();
 			updateOptions();
 			currentMode = Mode.PHASE1;
 					
 		} else if(currentMode == Mode.PHASE1){
+			System.out.println("p2");
 			updateCurrentTree();
 			updateOptions();
 			currentMode = Mode.PHASE2;
 			
 		} else if(currentMode == Mode.PHASE2){
+			System.out.println("p3");
 			updateCurrentTree();
 			updateOptions();
 			currentMode = Mode.PHASE3;
 			
 		} else if(currentMode == Mode.PHASE3){
+			System.out.println("p4");
 			updateCurrentTree();
 			updateOptions();
 			currentMode = Mode.PHASE4;
 			
 		} else if(currentMode == Mode.PHASE4){
+			System.out.println("end");
 			updateCurrentTree();
 			updateOptions();
 			currentMode = Mode.END;
