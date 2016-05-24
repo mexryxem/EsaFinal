@@ -15,13 +15,8 @@ public class Main extends PApplet{
 	private final int HALF_A_THIRD = (int)(WIDTH/6);
 	private final int TREE_START_Y = LENGTH - LENGTH/6;
 	
-	// the different phases of the simulation
-	// each mode represents a new screen displaying something different
-	private Mode currentMode;
-	private enum Mode{
-		INTRO, TREE_TYPE, PHASE1, PHASE2, PHASE3, PHASE4, END
-	}
-	
+	private boolean end = false;
+	private int currentMode = 0;
 	
 	// the tree that the game is working towards
 	// it is updated every time one of the tree options
@@ -42,7 +37,7 @@ public class Main extends PApplet{
 		size(WIDTH, LENGTH);
 		background(255);
 		
-		currentMode = Mode.INTRO;
+		//currentMode = Mode.INTRO;
 		
 		t = new Turtle(this);
 		t.setDirection(90);
@@ -63,9 +58,11 @@ public class Main extends PApplet{
 	
 	public void draw(){
 		background(255);
-		if(currentMode == Mode.INTRO) displayIntro();
-		else if(currentMode == Mode.END) displayFinalTree();
+		if(currentMode == 0) displayIntro();
+		else if(end) displayFinalTree();
 		else displayTrees();
+		
+		System.out.println(currentMode);
 		
 	}
 	
@@ -80,83 +77,56 @@ public class Main extends PApplet{
 		tree3.display();
 	}
 	
+
+	public void keyPressed(){
+		if(currentMode == 0) currentMode ++;
+		if(key == CODED){
+			if(key == ENTER) end = true;
+		}
+	}
+	
 	public void displayFinalTree(){
+		t.goToPoint(WIDTH/2, TREE_START_Y);
 		currentTree.display();
 	}
 	
-	public void keyPressed(){
-		if(currentMode == Mode.INTRO)
-			currentMode = Mode.TREE_TYPE;
+	public void mouseReleased(){
+		if(currentMode == 0) currentMode ++;
+		else {
+			updateCurrentTree();
+			updateOptions();
+			currentMode ++;
+		}
 	}
 	
-	// this handles changing of modes and updating the currentTree
-	public void mouseReleased(){
-		if(currentMode == Mode.TREE_TYPE){
-			System.out.println("tree - type going on phase1");
-			updateCurrentTree();
-			updateOptions();
-			currentMode = Mode.PHASE1;
-					
-		} else if(currentMode == Mode.PHASE1){
-			System.out.println("phase 1 going on phase 2");
-			updateCurrentTree();
-			updateOptions();
-			currentMode = Mode.PHASE2;
-			
-		} else if(currentMode == Mode.PHASE2){
-			System.out.println("phase 2 going on phase 3");
-			updateCurrentTree();
-			updateOptions();
-			currentMode = Mode.PHASE3;
-			
-		} else if(currentMode == Mode.PHASE3){
-			System.out.println("phase 3 going on phase 4");
-			updateCurrentTree();
-			updateOptions();
-			currentMode = Mode.PHASE4;
-			
-		} else if(currentMode == Mode.PHASE4){
-			System.out.println("phase 4 going on end");
-			updateCurrentTree();
-			updateOptions();
-			currentMode = Mode.END;
-		}
-			
-	}
 	
 	public void updateOptions(){
 		System.out.println("updating tree options");
-		tree1 = getTransformedInstanceTree(tree1);
-		tree2 = getTransformedInstanceTree(tree2);
-		tree3 = getTransformedInstanceTree(tree3);
+		tree1 = getTransformedInstanceTree(currentTree);
+		tree2 = getTransformedInstanceTree(currentTree);
+		tree3 = getTransformedInstanceTree(currentTree);
 		System.out.println("done updating tree options");
 	}
 	
+	
 	public AbstractTree getTransformedInstanceTree(AbstractTree tree){
 		if(tree instanceof SlingshotTree){
-			return (new SlingshotTree(t,
-					tree1.getLevel() * (int)(1 + Math.random() * 13),
-					tree1.getLength() * (int)(90 + Math.random() * 150),
-					tree1.getAngle() * (float)(25 + Math.random() * 35),
-					tree1.getThickness(),
-					tree1.getColor()));
+			System.out.println("updating slingshot");
+			int level = tree.getLevel() + (int)(Math.random() * 3);
+			return (new SlingshotTree(t, level, 100, 30, 7, 10));
 			
 		} else if(tree instanceof ForkTree){
-			return (new ForkTree(t,
-					tree1.getLevel() * (int)(3 + Math.random() * 9),
-					tree1.getLength() * (int)(90 + Math.random() * 150),
-					tree1.getAngle() * (float)(25 + Math.random() * 35),
-					tree1.getThickness(),
-					tree1.getColor()));
+			System.out.println("updating fork");
+			int level = tree.getLevel() + (int)( Math.random() * 3);
+			return (new SlingshotTree(t, level, 100, 30, 7, 10));
+			
 		}
 		
-		return (new SplitTree(t,
-				tree1.getLevel() * (int)(1 + Math.random() * 13),
-				tree1.getLength() * (int)(90 + Math.random() * 150),
-				tree1.getAngle() * (float)(25 + Math.random() * 35),
-				tree1.getThickness(),
-				tree1.getColor()));
+		System.out.println("updating split");
+		int level = tree.getLevel() + (int)( Math.random() * 3);
+		return (new SlingshotTree(t, level, 100, 30, 7, 10));
 	}
+	
 	
 	public void updateCurrentTree(){
 		System.out.println("updating current tree");
@@ -167,8 +137,8 @@ public class Main extends PApplet{
 			currentTree = getInstanceTree(tree2);
 				
 		// if mouse is in the last third of the screen
-		currentTree = getInstanceTree(tree3);
-		System.out.println("done updating current tree");
+		else {currentTree = getInstanceTree(tree3);
+		System.out.println("done updating current tree");}
 		
 	}
 	

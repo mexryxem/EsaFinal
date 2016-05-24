@@ -20,5 +20,9 @@ Day 4: 5/19/16
 - added code for displaying the tree options (displayTrees())
 - filled in drawTree for SlingshotTree and ForkTree
 
-Day 5: 5/23/2016
+Day 5: 5/23/16
 - filled in drawTree for SplitTree
+
+Day 6: 5/24/16
+- changed structure of mode changes so that player can play as long as they want
+- found and fixed bug in getTransformedIntanceTree
