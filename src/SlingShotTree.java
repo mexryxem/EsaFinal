@@ -28,6 +28,7 @@ public class SlingshotTree extends AbstractTree{
 		t.turnRight(2 * angle);
 		drawTree(t, level - 1, length/1.3f, angle, (int)(thickness/1.5), (int)(color/.7));
 		
+		// reset
 		t.turnLeft(angle);
 		t.forward(-length);
 	}

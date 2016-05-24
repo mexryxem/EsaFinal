@@ -48,8 +48,8 @@ public class Main extends PApplet{
 		t.setDirection(90);
 		
 		tree1 = new SlingshotTree(t, 3, 100, 30, 7, 10);
-		tree2 = new ForkTree(t, 3, 100, 30, 7, 10);
-		tree3 = new SplitTree(t, 3, 100, 30, 7, 10);
+		tree2 = new ForkTree(t, 3, 100, 60, 7, 10);
+		tree3 = new SplitTree(t, 3, 280, 30, 7, 10);
 		
 		//currentTree will be updated immediately after Phase1 - this is just to initialize it
 		currentTree = new SlingshotTree(t, 1, 100, 30, 7, 10);
@@ -92,31 +92,31 @@ public class Main extends PApplet{
 	// this handles changing of modes and updating the currentTree
 	public void mouseReleased(){
 		if(currentMode == Mode.TREE_TYPE){
-			System.out.println("p1");
+			System.out.println("tree - type going on phase1");
 			updateCurrentTree();
 			updateOptions();
 			currentMode = Mode.PHASE1;
 					
 		} else if(currentMode == Mode.PHASE1){
-			System.out.println("p2");
+			System.out.println("phase 1 going on phase 2");
 			updateCurrentTree();
 			updateOptions();
 			currentMode = Mode.PHASE2;
 			
 		} else if(currentMode == Mode.PHASE2){
-			System.out.println("p3");
+			System.out.println("phase 2 going on phase 3");
 			updateCurrentTree();
 			updateOptions();
 			currentMode = Mode.PHASE3;
 			
 		} else if(currentMode == Mode.PHASE3){
-			System.out.println("p4");
+			System.out.println("phase 3 going on phase 4");
 			updateCurrentTree();
 			updateOptions();
 			currentMode = Mode.PHASE4;
 			
 		} else if(currentMode == Mode.PHASE4){
-			System.out.println("end");
+			System.out.println("phase 4 going on end");
 			updateCurrentTree();
 			updateOptions();
 			currentMode = Mode.END;
@@ -125,9 +125,11 @@ public class Main extends PApplet{
 	}
 	
 	public void updateOptions(){
+		System.out.println("updating tree options");
 		tree1 = getTransformedInstanceTree(tree1);
 		tree2 = getTransformedInstanceTree(tree2);
 		tree3 = getTransformedInstanceTree(tree3);
+		System.out.println("done updating tree options");
 	}
 	
 	public AbstractTree getTransformedInstanceTree(AbstractTree tree){
@@ -157,6 +159,7 @@ public class Main extends PApplet{
 	}
 	
 	public void updateCurrentTree(){
+		System.out.println("updating current tree");
 		if(mouseX >= FIRST_THIRD && mouseX < SECOND_THIRD)
 			currentTree = getInstanceTree(tree1);
 				
@@ -165,6 +168,7 @@ public class Main extends PApplet{
 				
 		// if mouse is in the last third of the screen
 		currentTree = getInstanceTree(tree3);
+		System.out.println("done updating current tree");
 		
 	}
 	
