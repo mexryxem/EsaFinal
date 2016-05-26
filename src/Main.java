@@ -60,10 +60,7 @@ public class Main extends PApplet{
 		background(255);
 		if(currentMode == 0) displayIntro();
 		else if(end) displayFinalTree();
-		else displayTrees();
-		
-		System.out.println(currentMode);
-		
+		else displayTrees();		
 	}
 	
 	public void displayTrees(){
@@ -78,6 +75,7 @@ public class Main extends PApplet{
 	}
 	
 
+	//handles changing mode from intro to next
 	public void keyPressed(){
 		if(currentMode == 0) currentMode ++;
 		if(key == CODED){
@@ -85,11 +83,7 @@ public class Main extends PApplet{
 		}
 	}
 	
-	public void displayFinalTree(){
-		t.goToPoint(WIDTH/2, TREE_START_Y);
-		currentTree.display();
-	}
-	
+	//handles the changing of modes
 	public void mouseReleased(){
 		if(currentMode == 0) currentMode ++;
 		else {
@@ -99,37 +93,33 @@ public class Main extends PApplet{
 		}
 	}
 	
-	
 	public void updateOptions(){
-		System.out.println("updating tree options");
 		tree1 = getTransformedInstanceTree(currentTree);
 		tree2 = getTransformedInstanceTree(currentTree);
 		tree3 = getTransformedInstanceTree(currentTree);
-		System.out.println("done updating tree options");
 	}
 	
 	
 	public AbstractTree getTransformedInstanceTree(AbstractTree tree){
 		if(tree instanceof SlingshotTree){
-			System.out.println("updating slingshot");
-			int level = tree.getLevel() + (int)(Math.random() * 3);
-			return (new SlingshotTree(t, level, 100, 30, 7, 10));
+			int level = (int)(tree.getLevel() * (Math.random() * 3));
+			float angle = tree.getAngle() * (float)(Math.random() * 1.3);
+			return (new SlingshotTree(t, level, 100, angle, 7, 10));
 			
 		} else if(tree instanceof ForkTree){
-			System.out.println("updating fork");
-			int level = tree.getLevel() + (int)( Math.random() * 3);
-			return (new SlingshotTree(t, level, 100, 30, 7, 10));
+			int level = (int)(tree.getLevel() * (Math.random() * 3));
+			float angle = tree.getAngle() * (float)(Math.random() * 1.3);
+			return (new SlingshotTree(t, level, 100, angle, 7, 10));
 			
 		}
 		
-		System.out.println("updating split");
-		int level = tree.getLevel() + (int)( Math.random() * 3);
-		return (new SlingshotTree(t, level, 100, 30, 7, 10));
+		int level = (int)(tree.getLevel() * (int)(1 + Math.random() * 3));
+		float angle = tree.getAngle() * (float)(Math.random() * 1.3);
+		return (new SlingshotTree(t, level, 100, angle, 7, 10));
 	}
 	
 	
 	public void updateCurrentTree(){
-		System.out.println("updating current tree");
 		if(mouseX >= FIRST_THIRD && mouseX < SECOND_THIRD)
 			currentTree = getInstanceTree(tree1);
 				
@@ -137,9 +127,7 @@ public class Main extends PApplet{
 			currentTree = getInstanceTree(tree2);
 				
 		// if mouse is in the last third of the screen
-		else {currentTree = getInstanceTree(tree3);
-		System.out.println("done updating current tree");}
-		
+		else currentTree = getInstanceTree(tree3);		
 	}
 	
 	public AbstractTree getInstanceTree(AbstractTree tree){
@@ -160,6 +148,10 @@ public class Main extends PApplet{
 	public void displayIntro(){
 		fill(47,79,79);
 		text("welcome", WIDTH/2, LENGTH/2);
-		//text("press any key to continue", WIDTH/2, LENGTH/2 + 100, -200); //TODO: z parameter is not working
+	}
+	
+	public void displayFinalTree(){
+		t.goToPoint(WIDTH/2, TREE_START_Y);
+		currentTree.display();
 	}
 }
