@@ -102,21 +102,21 @@ public class Main extends PApplet{
 	
 	public AbstractTree getTransformedInstanceTree(AbstractTree tree){
 		if(tree instanceof SlingshotTree){
-			int level = (int)(3 + Math.random() * 7);
-			float angle = tree.getAngle() * (float)(Math.random() * 1.3);
+			int level = (int)(3 + Math.random() * 13);
+			float angle = (float)( -60 + Math.random() * 60);
 			float length = (float)(90 + Math.random() * 100);
 			return (new SlingshotTree(t, level, length, angle, 7, 10));
 			
 		} else if(tree instanceof ForkTree){
 			int level = (int)(3 + Math.random() * 7);
-			float angle = tree.getAngle() * (float)(Math.random() * 1.3);
+			float angle = (float)( -60 + Math.random() * 60);
 			float length = (float)(90 + Math.random() * 100);
 			return (new ForkTree(t, level, length, angle, 7, 10));
 			
 		}
 		
 		int level = (int)(3 + Math.random() * 5);
-		float angle = tree.getAngle() * (float)(Math.random() * 1.3);
+		float angle = (float)( -60 + Math.random() * 60);
 		float length = (float)(90 + Math.random() * 100);
 		return (new SplitTree(t, level, length, angle, 7, 10));
 	}
