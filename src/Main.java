@@ -16,7 +16,7 @@ public class Main extends PApplet{
 	private final int TREE_START_Y = LENGTH - LENGTH/6;
 	
 	private boolean end = false;
-	private int currentMode = 0;
+	private int currentMode;
 	
 	// the tree that the game is working towards
 	// it is updated every time one of the tree options
@@ -37,7 +37,7 @@ public class Main extends PApplet{
 		size(WIDTH, LENGTH);
 		background(255);
 		
-		//currentMode = Mode.INTRO;
+		currentMode = 0;
 		
 		t = new Turtle(this);
 		t.setDirection(90);
@@ -78,8 +78,8 @@ public class Main extends PApplet{
 	//handles changing mode from intro to next
 	public void keyPressed(){
 		if(currentMode == 0) currentMode ++;
-		if(key == CODED){
-			if(key == ENTER) end = true;
+		else if(currentMode != 0){
+			end = true;
 		}
 	}
 	
@@ -154,6 +154,7 @@ public class Main extends PApplet{
 	}
 	
 	public void displayFinalTree(){
+		background(255);
 		t.goToPoint(WIDTH/2, TREE_START_Y);
 		currentTree.display();
 	}
